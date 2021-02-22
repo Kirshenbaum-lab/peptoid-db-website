@@ -1,0 +1,167 @@
+{% extends "base.html" %} {% block styles %} {{super()}}
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='bootstrap-grid.css')}}"
+/>
+{% endblock %} {% block app_content %}
+<div class="jumbotron">
+  <h1 style="font-size:5rem;" class="display-4">Application Programming Interface (API)</h1>
+  <p>Peptoid Data Bank - Our API</p>
+  <hr class="my-4" />
+  <p style="font-size: 1.5rem; font-weight: 300;">
+    Our API allows peptoid researchers to retrieve data directly from our
+    database in their own programs and scripts. We offer both a RESTful API and a GraphQL API.
+    For more information on the RESTful API see the routes listed below. 
+    For more information on the GraphQL API please click the button below or go to the route <code>/graphql</code> to launch an interactive GraphQL IDE, which contains built-in documentation. 
+    Also, code examples using Python for both APIs are provided below.
+  </p>
+</div>
+<div class="container" style="padding-bottom: 30px;">
+  <div class="row">
+    <div class="col text-center">
+      <a
+        type="button"
+        class="btn btn-primary btn-lg"
+        href="{{url_for('graphql')}}"
+        target="_blank"
+        >GraphQL API</a
+      >
+    </div>
+  </div>
+</div>
+<div
+  class="card"
+  style="
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    padding: 1rem !important;
+    margin-bottom: 3rem !important;
+    background-color: #f8f9fa !important;
+    border-radius: 0.25rem !important;
+  "
+>
+  <div class="card-body">
+    <h1>Routes</h1>
+    <h4>
+      <div class="row" style="padding-bottom: 20px;">
+        <div class="col-sm">
+          <div class="col text-left">
+            <mark>'api/peptoids'</mark>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="col text-left">
+            Returns a list of JSON objects for each peptoid
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 20px;">
+        <div class="col-sm">
+          <div class="col text-left">
+            <mark>'api/residues'</mark>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="col text-left">
+            Returns a list of JSON objects for each residue
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 20px;">
+        <div class="col-sm">
+          <div class="col text-left">
+            <mark>'api/peptoids'</mark>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="col text-left">
+            Returns a list of JSON objects for each author
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 20px;">
+        <div class="col-sm text-left">
+          <div class="col text-left">
+            <mark>'api/peptoids/{CODE}'</mark>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="col text-left">
+            Returns a JSON object of a specific peptoid's properties
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 20px;">
+        <div class="col-sm">
+          <div class="col text-left">
+            <mark>'api/peptoids/{CODE}/residues'</mark>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="col text-left">
+            Returns a JSON object for a specific peptoid's residues
+          </div>
+        </div>
+      </div>
+      <div class="row" style="padding-bottom: 20px;">
+        <div class="col-sm">
+          <div class="col text-left">
+            <mark>'api/peptoids/{CODE}/authors'</mark>
+          </div>
+        </div>
+        <div class="col-sm">
+          <div class="col text-left">
+            Returns a JSON object for a specific peptoid's authors
+          </div>
+        </div>
+      </div>
+    </h4>
+  </div>
+</div>
+<div
+  class="card"
+  style="
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    padding: 1rem !important;
+    margin-bottom: 3rem !important;
+    background-color: #f8f9fa !important;
+    border-radius: 0.25rem !important;
+  "
+>
+<div class="card-body">
+  <h1>API Examples in Python</h1>
+  <div class="row" style="padding-bottom: 20px;">
+  <div class="col text-center" style="padding: 2em;">
+    <a
+      type="button"
+      class="btn btn-danger btn-lg"
+      href="https://gist.github.com/etweisberg/5189e27d66b109124c9a2bdbc7d1e1d3"
+      target="_blank"
+      >
+      <span class="glyphicon glyphicon-file" aria-hidden="true"></span> RESTful API Example</a
+    >
+  </div>
+  <div class="col text-center" style="padding: 2em;">
+    <a
+      type="button"
+      class="btn btn-danger btn-lg"
+      href="https://gist.github.com/etweisberg/2ed84cae6fe86989dabd6822c2ccf285"
+      target="_blank"
+      >
+      <span class="glyphicon glyphicon-file" aria-hidden="true"></span> GraphQL API Example</a
+    >
+  </div>
+</div>
+  </div>
+</div>
+</div>
+</div>
+<br />
+<br />
+<br />
+{% endblock %}

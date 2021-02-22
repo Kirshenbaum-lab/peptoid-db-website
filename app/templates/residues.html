@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{# importing styles from bootstrap-grid.css #}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='bootstrap-grid.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='images.css')}}" />
+{% endblock %}
+
+{% block app_content%}
+
+<div class="jumbotron">
+    <h1 class="display-4">{{ title }}</h1>
+    <p>Peptoid Data Bank - More information about the residues that can be found in the Peptoid Data Bank</p>
+    <hr class="my-4">
+    <p style="font-size: 1.5rem; font-weight: 300;">Use the CSD link to view/download the residue structural file.</p>
+</div>
+
+{% for residue in residues%}
+<a id={{ residue.long_name }} style='pointer-events: none; cursor: default; color:black; text-decoration: none;'>
+    <div class="card" style='width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        padding: 1rem !important; margin-bottom: 3rem !important;
+        background-color: #f8f9fa !important;
+        border-radius: 0.25rem !important;'>
+        <div class="card-body">
+            <div class="header">
+                <h2>{{ residue.long_name }}</h2>
+            </div>
+            <img src="{{url_for('static',filename='residues/'+residue.long_name + '.png')}}" class='img-responsive'
+                style="margin: auto; height:35%">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="col text-left">
+                            <h4>Peptoid type</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="col text-right">
+                            <h4>{{ residue.pep_type }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="col text-left">
+                            <h4>SMILES</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="col text-right">
+                            <h4>{{ residue.SMILES }}</h4>
+                        </div>
+                    </div>
+                </div>
+                {% if residue.short_name != 'null' %}
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="col text-left">
+                            <h4>Shortened nomenclature</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="col text-right">
+                            <h4>{{ residue.short_name }}</h4>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if residue.monomer_structure != '' %}
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="col text-left">
+                            <h4>Monomer Structure</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="col text-right">
+                            <a target = '_blank' class="btn btn-success" href = {{"https://doi.org/{doi}".format(doi = residue.monomer_structure)}}>{{residue.monomer_structure}}</a>
+                    </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+        </div>
+    </div>
+</a>
+{% endfor %}
+{% endblock %}

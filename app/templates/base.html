@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <link
+      rel="shortcut icon"
+      href="{{url_for('static', filename='icon.ico')}}"
+    />
+  </head>{% extends 'bootstrap/base.html' %} {% block title %} {% if title %}{{ title
+  }}{% else %}Welcome to the PeptoidDB{% endif %} {% endblock %}
+  <body>
+    {% block navbar %}
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header navbar-center">
+          <a class="navbar-brand" href="{{ url_for('routes.home') }}"
+            >PeptoidDB</a
+          >
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-center">
+            <li><a href="{{ url_for('routes.gallery') }}">Gallery</a></li>
+            <li><a href="{{ url_for('routes.search') }}">Search</a></li>
+            <li><a href="{{ url_for('routes.residues') }}">Residues</a></li>
+            <li><a href="{{ url_for('routes.api') }}">Application Programming Interface</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% endblock %} {% block content %}
+    <div class="container">
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for
+      message in messages %}
+      <div class="alert alert-info" role="alert">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %} {# application content needs to be
+      provided in the app_content block #} {% block app_content %}{% endblock %}
+    </div>
+    {% endblock %}
+  </body>
+
+{% block scripts %}
+  {{ super() }}
+  {{ moment.include_moment() }}
+  <script>
+  $(function () {
+           var timer = null;
+           var xhr = null;
+           $('.residue_popout').hover(
+               function(event) {
+                   // mouse in event handler
+                   var elem = $(event.currentTarget);
+                   timer = setTimeout(function() {
+                       timer = null;
+                       xhr = $.ajax(
+                           '/residue/' + elem.first().text().trim() + '/popout').done(
+                               function(data) {
+                                   xhr = null;
+                                   elem.popover({
+                                       title: elem.first().text().trim(),
+                                       trigger: 'manual',
+                                       placement: 'top',
+                                       html: true,
+                                       animation: false,
+                                       container: 'body',
+                                       content: data
+                                   }).popover('show');
+                                   flask_moment_render_all();
+                               }
+                           );
+                   }, 100);
+               },
+               function(event) {
+                   // mouse out event handler
+                   var elem = $(event.currentTarget);
+                   if (timer) {
+                       clearTimeout(timer);
+                       timer = null;
+                   }
+                   else if (xhr) {
+                       xhr.abort();
+                       xhr = null;
+                   }
+                   else {
+                     elem.popover('destroy');
+                   }
+               }
+           );
+       });
+  </script>
+{% endblock %}
+</html>

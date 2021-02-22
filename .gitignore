@@ -1,0 +1,6 @@
+*.pyc
+.DS_Store
+.vscode
+migrations
+Dockerfile
+boot.sh

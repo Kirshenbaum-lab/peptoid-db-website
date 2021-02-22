@@ -1,0 +1,42 @@
+{% extends "base.html" %} {# importing styles from bootstrap-grid.css #} {%
+block styles %} {{super()}}
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='bootstrap-grid.css')}}"
+/>
+{% endblock %} {# allows for easy integration of wtf-form with bootstrap styles
+#} {% import 'bootstrap/wtf.html' as wtf %} {# loads in form #} {% block
+app_content %}
+<div class="jumbotron">
+  <h1 class="display-4">{{ title }}</h1>
+  <p>{{description}}</p>
+  <hr class="my-4" />
+  <p style="font-size: 1.5rem; font-weight: 300;">{{info}}</p>
+  <p>
+    <ul style="font-size: 1.75rem; font-weight: 300;">
+      <code>"Search by a residue"</code> - specify the chemical name or abbreviation for a residue
+    </ul>
+    <ul style="font-size: 1.75rem; font-weight: 300;">
+      <code>"Search by an author"</code> - specify the last name and/or first name of an author (when using both follow last, first)
+    </ul>
+    <ul style="font-size: 1.75rem; font-weight: 300;">
+      <code>"Search by a topology type"</code> - search A for linear, C for cyclic, and M for multicyclic
+    </ul>
+    <ul style="font-size: 1.75rem; font-weight: 300;">
+      <code>"Search by an experimental technique"</code> - search <mark>"X-Ray Diffraction"</mark> or <mark>"Solution NMR"</mark>
+    </ul>
+    <ul style="font-size: 1.75rem; font-weight: 300;">
+      <code>"Search by DOI"</code> - use either a structural or publication DOI
+    </ul>
+  </p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-8">
+      {{ form.option.label }} {{ wtf.quick_form(form) }}
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+{% endblock %}

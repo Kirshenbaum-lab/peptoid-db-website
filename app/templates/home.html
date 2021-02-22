@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block app_content %}
+<div class="jumbotron">
+  <h1 class="display-4">{{title}}</h1>
+  <p>Peptoid Data Bank - Home page</p>
+  <hr class="my-4" />
+  <p style="font-size: 1.5rem; font-weight: 300;">
+    This is the new and improved Peptoid Data Bank, a database of all known
+    peptoid structures that can be explored easily. Use the gallery to browse
+    structures, perform searches, examine our list of peptoid residues, and
+    experiment with our Application Programming Interfaces (APIs) for advanced
+    chemoinformatic analysis. This project is open-source, and is currently
+    maintained by James Eastwood and Ethan Weisberg.
+  </p>
+  <div style="text-align: center;">
+    <a
+      href="https://github.com/etweisberg/peptoid_db_website"
+      target="_blank"
+      class="btn btn-primary btn-lg"
+    >
+      <span class="glyphicon glyphicon-console" aria-hidden="true"></span>
+      GitHub
+    </a>
+  </div>
+</div>
+<div class="text-center">
+  <img src={{ url_for('static',filename='home.png') }}>
+</div>
+<h1>The Peptoid Data Bank</h1>
+<p>
+  The PeptoidDB serves to provide the scientific community with a comprehensive
+  source of all known, experimentally determined, high-resolution,
+  three-dimensional peptoid structures. While currently the number of X-ray
+  crystal and NMR structures is limited, it is our hope that this database will
+  provide researchers with convenient structural information that will allow the
+  database to expand, providing more insight into peptoid conformation.
+</p>
+<h1>New Features</h1>
+<p>
+  The <em>new</em> Peptoid Data Bank allows researchers to search for peptoids
+  published by specific authors, containing specific residues, with a certain
+  DOI, topology, or ones solved by one of the two experimental techniques.
+  Additionally, the new Peptoid Data Bank offers an Application Programming
+  Interface (API) that can be used by researchers to access data from the
+  database with their own custom code.
+</p>
+<h1>About the Data</h1>
+<p>
+  Published structures consisting of at least three tertiary amide bonds, linked
+  only by methylene units, are included here. Structures consisting only of
+  Proline are omitted, as they are well-respresented in other data banks.
+  Listings for X-ray crystal structures link to the data deposited in the
+  <a href="https://www.ccdc.cam.ac.uk/solutions/csd-core/components/CSD/"
+    >Cambridge Structural Database</a
+  >. Listings for NMR structures link to the original publication, where each
+  structure is available as Supporting Information.
+</p>
+<br />
+<br />
+<br />
+{% endblock %}
