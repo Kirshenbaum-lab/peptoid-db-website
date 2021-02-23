@@ -13,17 +13,17 @@ def wants_json_response():
 def not_found_error(error):
     if wants_json_response():
         return api_error_response(404)
-    return render_template('404.html'), 404
+    return render_template('404.html',title="Not Found"), 404
 
 
 @bp.app_errorhandler(500)
 def internal_error(error):
     if wants_json_response():
         return api_error_response(500)
-    return render_template('500.html'), 500
+    return render_template('500.html',title="Server Error"), 500
 
 @bp.app_errorhandler(429)
 def too_many_requests(error):
     if wants_json_response():
         return api_error_response(429)
-    return render_template('429.html'), 429
+    return render_template('429.html',title="Too Many Requests"), 429

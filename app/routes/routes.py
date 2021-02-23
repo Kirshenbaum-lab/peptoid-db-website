@@ -39,7 +39,7 @@ def get_home(peptoids):
 
 @bp.route('/home')
 def home():
-    return render_template('home.html', title="PeptoidDB")
+    return render_template('home.html', title="Peptoid Data Bank")
 
 # gallery route displaying all petoids in reverse chron order using gallery.html template
 @bp.route('/gallery')
