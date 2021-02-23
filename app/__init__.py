@@ -1,5 +1,6 @@
 #importing essential modules for instantiating application and extensions
 from flask import Flask
+from flask.views import View
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -40,4 +41,9 @@ app.register_blueprint(routes_bp)
 from app import models
 from .schema import schema
 
-app.add_url_rule('/graphql', view_func=GraphQLView.as_view('graphql', schema=schema, graphiql=True))
+class myGraphQLView(GraphQLView):
+    decorators = [limiter.limit('1000 per minute')]
+    def dispatch_request(self):
+        return GraphQLView.dispatch_request(self)
+
+app.add_url_rule('/graphql', view_func=myGraphQLView.as_view('graphql', schema=schema, graphiql=True))
