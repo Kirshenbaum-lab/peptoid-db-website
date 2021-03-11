@@ -24,7 +24,8 @@ peptoid_residue = db.Table('peptoid-residue',
 
 
 class Peptoid(db.Model):
-    code = db.Column(db.String(16), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    code = db.Column(db.String(16), index=True, unique=True)
     title = db.Column(db.Text, index=True, unique=False)
     release = db.Column(db.DateTime, index=True, unique=False)
     experiment = db.Column(db.Text, index=True, unique=False)
