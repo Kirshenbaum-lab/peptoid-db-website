@@ -25,7 +25,8 @@ def get_home(peptoids):
         else:
             l = [pos for pos, char in enumerate(p.sequence) if char == ',']
             peptoid_sequences.append(p.sequence[:l[2]] + " ...")
-        if p.experiment == 'X-Ray Diffraction':
+        
+        if p.struct_doi:
             data.append("https://www.doi.org/{}".format(p.struct_doi))
             publications.append("https://www.doi.org/{}".format(p.pub_doi))
         else:
