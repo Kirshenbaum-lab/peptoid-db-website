@@ -4,19 +4,26 @@
       rel="shortcut icon"
       href="{{url_for('static', filename='icon.ico')}}"
     />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
   </head>{% extends 'bootstrap/base.html' %} {% block title %} {% if title %}{{ title
   }}{% else %}Welcome to the PeptoidDB{% endif %} {% endblock %}
   <body>
     {% block navbar %}
     <nav class="navbar navbar-default">
       <div class="container">
-        <div class="navbar-header navbar-center">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <a class="navbar-brand" href="{{ url_for('routes.home') }}"
             >PeptoidDB</a
           >
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-center">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
             <li><a href="{{ url_for('routes.gallery') }}">Gallery</a></li>
             <li><a href="{{ url_for('routes.search') }}">Search</a></li>
             <li><a href="{{ url_for('routes.residues') }}">Residues</a></li>
