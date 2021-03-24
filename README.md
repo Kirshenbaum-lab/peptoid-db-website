@@ -1,7 +1,7 @@
 # Peptoid Data Bank
 # How to install and run locally
 ## Prerequisites
-- Install Python version 3.6 or newer ([Need help?](https://realpython.com/installing-python/))
+- Install Python version >=3.6 and <3.8 ([Need help?](https://realpython.com/installing-python/))
 - Install required packages using the command `pip install -r requirements.txt`
 
 ## Run application locally
