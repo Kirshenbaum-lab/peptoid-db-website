@@ -1,6 +1,5 @@
 #importing essential modules for instantiating application and extensions
 from flask import Flask
-from flask.views import View
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate

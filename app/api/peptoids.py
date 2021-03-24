@@ -7,7 +7,7 @@ from app import limiter
 @bp.route('/peptoids/<code>', methods=['GET'])
 @limiter.limit("1000 per minute")
 def get_peptoid(code):
-    return jsonify(Peptoid.query.get_or_404(code).to_dict())
+    return jsonify(Peptoid.query.filter_by(code=code).first().to_dict())
 
 
 @bp.route('/peptoids', methods=['GET'])
@@ -40,7 +40,7 @@ def get_authors():
 def get_pep_residues(code):
     data = {}
     i = 1
-    for r in Peptoid.query.get_or_404(code).peptoid_residue:
+    for r in Peptoid.query.filter_by(code=code).first_or_404().peptoid_residue:
         data[f'Residue {i}'] = r.to_dict()
         i += 1
     return jsonify(data)
@@ -51,7 +51,7 @@ def get_pep_residues(code):
 def get_pep_authors(code):
     data = {}
     i = 1
-    for a in Peptoid.query.get_or_404(code).peptoid_author:
+    for a in Peptoid.query.filter_by(code=code).first_or_404().peptoid_author:
         data[f'Author {i}'] = a.to_dict()
         i += 1
     return jsonify(data)
