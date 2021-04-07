@@ -16,12 +16,37 @@ block styles %} {{super()}}
   <p>Peptoid Data Bank - Browse peptoid structures</p>
   <hr class="my-4" />
   <p style="font-size: 1.5rem; font-weight: 300;">
-    Utilize the search option, "Explore," to filter the database by specific
+    Utilize the search option to filter the database by specific
     peptoid properties
   </p>
 </div>
 
-{% block additional_info %}{% endblock %}
+{% if view == '2d' %}
+<div class="container" style="padding-bottom: 30px;">
+  <div class="row">
+    <div class="col text-center">
+      {% if var %}
+      <a class="btn btn-default btn-lg" href={{url_for(request.endpoint, var=var, page=page, view='3d')}}>Toggle View <span class="badge">Structure</span></a>
+      {% else %}
+      <a class="btn btn-default btn-lg" href={{url_for(request.endpoint, page=page, view='3d')}}>Toggle View <span class="badge">Structure</span></a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% elif view == '3d' %}
+<div class="container" style="padding-bottom: 30px;">
+  <div class="row">
+    <div class="col text-center">
+      {% if var %}
+      <a class="btn btn-default btn-lg" href={{url_for(request.endpoint, var=var, page=page, view='2d')}}>Toggle View <span class="badge">Diagram</span></a>
+      {% else %}
+      <a class="btn btn-default btn-lg" href={{url_for(request.endpoint, page=page, view='2d')}}>Toggle View <span class="badge">Diagram</span></a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
 <div class="container">
   <div class="row block-center">
     {% for i in range(peptoid_codes.__len__())%} {% if i ==
@@ -34,9 +59,15 @@ block styles %} {{super()}}
           <h2><a style="text-decoration : none; color : #ffffff;" href="{{ peptoid_urls[i] }}">{{ peptoid_codes[i] }}</a></h2>
         </div>
         <div class="fall-item fall-effect">
+          {% if view == '3d' %}
           <img
             src="{{url_for('static', filename='peptoids/'+peptoid_codes[i][:5]+'.png')}}"
           />
+          {% elif view == '2d' %}
+          <img
+            src="{{url_for('static', filename='peptoids/'+peptoid_codes[i]+'_2d'+'.png')}}"
+          />
+          {% endif %}
           <div class="mask">
             <h3>{{ peptoid_titles[i] }}</h3>
             <h4>{{ peptoid_sequences[i] }}</h4>

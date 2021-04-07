@@ -34,11 +34,15 @@
     </nav>
     {% endblock %} {% block content %}
     <div class="container">
-      {% with messages = get_flashed_messages() %} {% if messages %} {% for
-      message in messages %}
-      <div class="alert alert-info" role="alert">{{ message }}</div>
-      {% endfor %} {% endif %} {% endwith %} {# application content needs to be
-      provided in the app_content block #} {% block app_content %}{% endblock %}
+      {% with messages = get_flashed_messages(with_categories=true) %} 
+        {% if messages %} 
+          {% for category, message in messages %}
+            <div class="alert alert-{{category}}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    {# application content needs to be provided in the app_content block #}
+    {% block app_content %}{% endblock %}
     </div>
     {% endblock %}
   </body>
@@ -66,7 +70,7 @@
                                        placement: 'top',
                                        html: true,
                                        animation: false,
-                                       container: 'body',
+                                       container: elem,
                                        content: data
                                    }).popover('show');
                                    flask_moment_render_all();

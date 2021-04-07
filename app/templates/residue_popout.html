@@ -5,9 +5,9 @@
 />
 <p>{{ residue.pep_type }}</p>
 <p>{{ residue.SMILES }}</p>
-{% if residue.short_name != 'null' %}
+{% if residue.short_name %}
   <p>{{ residue.short_name }}</p>
 {% endif %}
-{% if residue.monomer_structure != '' %}
+{% if residue.monomer_structure %}
   <a target = '_blank' class="btn btn-success" href = {{"https://doi.org/{doi}".format(doi = residue.monomer_structure)}}>{{residue.monomer_structure}}</a>
 {% endif %}

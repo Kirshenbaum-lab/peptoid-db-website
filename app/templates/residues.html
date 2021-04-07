@@ -5,9 +5,21 @@
 {{super()}}
 <link rel="stylesheet" href="{{url_for('static', filename='bootstrap-grid.css')}}">
 <link rel="stylesheet" href="{{url_for('static', filename='images.css')}}" />
+<style>
+    button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+</style>
 {% endblock %}
-
 {% block app_content%}
+<a href=#navbar><button class="btn btn-success btn-lg"><span class="glyphicon glyphicon-arrow-up"></span></button></a>
+
+
 
 <div class="jumbotron">
     <h1 class="display-4">{{ title }}</h1>
@@ -16,6 +28,32 @@
     <p style="font-size: 1.5rem; font-weight: 300;">Use the CSD link to view/download the residue structural file.</p>
 </div>
 
+<h1>Quick Links</h1>
+<div class="container">
+    <div class="row" style>
+        {% for i in range(residues.__len__())%}
+            {% if i >= (residues.__len__()-3) %}
+            <div class="col-sm-3">
+                {% else %}
+                <div class="col-sm">
+                    {% endif %}
+                    <div class="text-center">
+                        <a href={{ url_for('routes.residues')}}#{{residues[i].long_name}}>{{residues[i].long_name}}</a>
+                    </div>
+                </div>
+            {% if (i+1) % 4 == 0 and i != (residues.__len__()-1)%}
+        </div>
+        <hr />
+<div class="row">
+    {% endif %}
+    {% endfor %}
+</div>
+</div>
+<br>
+<br>
+<br>
+
+
 {% for residue in residues%}
 <a id={{ residue.long_name }} style='pointer-events: none; cursor: default; color:black; text-decoration: none;'>
     <div class="card" style='width: 100%;
@@ -23,7 +61,7 @@
         margin-left: auto;
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
         padding: 1rem !important; margin-bottom: 3rem !important;
-        background-color: #f8f9fa !important;
+        background-color: #ffffff !important;
         border-radius: 0.25rem !important;'>
         <div class="card-body">
             <div class="header">
@@ -56,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-                {% if residue.short_name != 'null' %}
+                {% if residue.short_name %}
                 <div class="row">
                     <div class="col-sm">
                         <div class="col text-left">
@@ -70,7 +108,7 @@
                     </div>
                 </div>
                 {% endif %}
-                {% if residue.monomer_structure != '' %}
+                {% if residue.monomer_structure %}
                 <div class="row">
                     <div class="col-sm">
                         <div class="col text-left">
@@ -84,9 +122,24 @@
                 </div>
               </div>
               {% endif %}
+              {% if residue.peptoids.__len__() > 0 %}
+              <div class="row">
+                  <div class="col-sm">
+                      <div class="col text-left">
+                        <h4>Peptoids</h4>
+                      </div>
+                  </div>
+                  <div class="col-sm">
+                      <div class="col text-right">
+                        <a target = '_blank' class="btn btn-primary" href = {{url_for('routes.residue',var=residue.long_name)}}>Peptoids <span class="badge">{{residue.peptoids.__len__()}}</span></a>
+                      </div>
+                  </div>
+              </div>
+              {% endif %}
             </div>
         </div>
     </div>
 </a>
 {% endfor %}
+</div>
 {% endblock %}

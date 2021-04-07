@@ -1,25 +1,24 @@
-{% extends "base.html" %} 
-{% block styles %} {{super()}}
-  <link
-    rel="stylesheet"
-    href="{{url_for('static', filename='bootstrap-grid.css')}}"
-  />
-  <link rel="stylesheet" href="{{url_for('static', filename='images.css')}}" />
-{% endblock %}
-{% block app_content %}
+{% extends "base.html" %} {% block styles %} {{super()}}
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='bootstrap-grid.css')}}"
+/>
+<link rel="stylesheet" href="{{url_for('static', filename='images.css')}}" />
+{% endblock %} {% block app_content %}
 <div class="jumbotron">
   <h1 class="display-4">{{title}}</h1>
   <p>Peptoid Data Bank - Home page</p>
   <hr class="my-4" />
-  <p style="font-size: 1.5rem; font-weight: 300;">
-    This is the new and improved Peptoid Data Bank, a database of all known
-    peptoid structures that can be explored easily. Use the gallery to browse
-    structures, perform searches, examine our list of peptoid residues, and
-    experiment with our Application Programming Interfaces (APIs) for advanced
-    chemoinformatic analysis. This project is open-source, and is currently
-    maintained by James Eastwood and Ethan Weisberg in the Dr. Kent Kirshenbaum Lab.
+  <p style="font-size: 1.5rem; font-weight: 300">
+    Welcome to the Peptoid Data Bank, an evolving database of peptoid
+    three-dimensional structures. Use the gallery to browse structures, perform
+    searches, examine a list of peptoid residues, and experiment with our
+    Application Programming Interfaces (APIs) for advanced chemoinformatic
+    analysis. This project is open-source, and is currently maintained by James
+    Eastwood and Ethan Weisberg in the research group of Kent Kirshenbaum at New
+    York University.
   </p>
-  <div style="text-align: center;">
+  <div style="text-align: center">
     <a
       href="https://github.com/etweisberg/peptoid-db-website"
       target="_blank"
@@ -31,31 +30,33 @@
   </div>
 </div>
 <div class="text-center">
-  <img class="img-responsive" style="display: block; margin-left: auto; margin-right: auto;" src={{ url_for('static',filename='home.png') }}>
+  <img class="img-responsive" style="display: block; margin-left: auto;
+  margin-right: auto;" src={{ url_for('static',filename='home.png') }}>
 </div>
 <h1>The Peptoid Data Bank</h1>
 <p>
   The PeptoidDB serves to provide the scientific community with a comprehensive
-  source of all known, experimentally determined, high-resolution,
-  three-dimensional peptoid structures. While currently the number of X-ray
-  crystal and NMR structures is limited, it is our hope that this database will
-  provide researchers with convenient structural information that will allow the
+  catalog of experimentally determined, high-resolution, three-dimensional
+  peptoid structures. While currently the number of X-ray crystal and NMR
+  structures is limited, it is our hope that this database will provide
+  researchers with convenient structural information that will allow the
   database to expand, providing more insight into peptoid conformation.
 </p>
 <h1>New Features</h1>
 <p>
-  The <em>new</em> Peptoid Data Bank allows researchers to search for peptoids
+  The Peptoid Data Bank allows researchers to search for peptoids
   published by specific authors, containing specific residues, with a certain
   DOI, topology, or ones solved by one of the two experimental techniques.
   Additionally, the new Peptoid Data Bank offers an Application Programming
   Interface (API) that can be used by researchers to access data from the
-  database with their own custom code.
+  database with their own code or programs.
 </p>
 <h1>About the Data</h1>
 <p>
-  Published structures consisting of at least three tertiary amide bonds, linked
-  only by methylene units, are included here. Structures consisting only of
-  Proline are omitted, as they are well-respresented in other data banks.
+  <!-- Our focus is on three or more -->
+  Our focus is on published structures consisting of at least three tertiary amide bonds, linked
+  only by methylene units. Structures consisting only of
+  Proline are omitted, as they are well-represented in other data banks.
   Listings for X-ray crystal structures link to the data deposited in the
   <a href="https://www.ccdc.cam.ac.uk/solutions/csd-core/components/CSD/"
     >Cambridge Structural Database</a
