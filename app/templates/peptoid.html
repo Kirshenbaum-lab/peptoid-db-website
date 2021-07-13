@@ -33,6 +33,18 @@
             <div class="row">
                 <div class="col-sm">
                     <div class="col text-left">
+                        <h4>Database Code</h4>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="col text-left">
+                        <h4>{{ code }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="col text-left">
                         <h4>Release</h4>
                     </div>
                 </div>
@@ -86,12 +98,12 @@
             <div class="row">
                 <div class="col-sm">
                     <div class="col text-left">
-                        <h4>Database Code</h4>
+                        <h4>Citation</h4>
                     </div>
                 </div>
                 <div class="col-sm">
                     <div class="col text-left">
-                        <h4>{{ code }}</h4>
+                        <a target='_blank' class="btn btn-success" href={{ url_for('routes.citation',code=code) }}>BibTex Citation</a>
                     </div>
                 </div>
             </div>
@@ -130,7 +142,7 @@ border-radius: 0.25rem !important;'>
             <div class = "col-sm">
                 <div class = "col text-center">
                 {% for auth in authors %}
-                <a class="btn btn-primary" href = {{ url_for('routes.author',var = auth.last_name)}} style = "margin-top:10px;">{{ auth.first_name }} {{ auth.last_name }}</a>
+                <a class="btn btn-primary" href = {{ url_for('routes.author',var = auth.last_name + ", " + auth.first_name)}} style = "margin-top:10px;">{{ auth.first_name }} {{ auth.last_name }}</a>
                 {% endfor %}
                 </div>
             </div>

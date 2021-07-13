@@ -1,5 +1,5 @@
 # importing important route-related flask functions, form for searching database, database models, blueprint for routes
-from flask import render_template, redirect, url_for, abort, flash
+from flask import render_template, redirect, url_for, abort, flash, make_response
 from app.routes.forms import SearchForm
 from app.models import Peptoid, Author, Residue
 from app.routes import bp
@@ -171,6 +171,13 @@ def residue_popout(var):
         Residue.short_name == var)).first_or_404()
     return render_template('residue_popout.html', residue=residue, title='Popout')
 
+@bp.route('/peptoid/<code>/citation')
+def citation(code):
+    peptoid = Peptoid.query.filter_by(code=code).first_or_404()
+    response = make_response(peptoid.citation, 200)
+    response.mimetype = "text/plain"
+    return response
+
 
 # residue route for residue, name = var
 @bp.route('/residue/<var>')
@@ -182,7 +189,7 @@ def residue(var):
     residues = Residue.query.filter((Residue.long_name == var) | (
             Residue.short_name == var)).all()
     if len(residues) == 0:
-        flash(f'NO RESIDUES for: {var}','danger')
+        flash(f'NO RESIDUES for: <{var}>','danger')
         abort(404)
     peptoids = []
     for r in residues:
@@ -215,6 +222,9 @@ def author(var):
     else:
         authors = Author.query.filter((Author.first_name == var) | (
             Author.last_name == var)).all()
+    if len(authors) == 0:
+        flash(f'NO AUTHORS for: <{var}>','danger')
+        abort(404)
     peptoids = []
     for a in authors:
         peptoids.extend(a.peptoids)

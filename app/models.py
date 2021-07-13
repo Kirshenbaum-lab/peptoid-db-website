@@ -31,8 +31,9 @@ class Peptoid(db.Model):
     title = db.Column(db.Text, unique=False)
     release = db.Column(db.DateTime, unique=False)
     experiment = db.Column(db.Text, unique=False)
-    pub_doi = db.Column(db.String(32), unique=False)
-    struct_doi = db.Column(db.String(32), unique=False)
+    pub_doi = db.Column(db.String(64), unique=False)
+    struct_doi = db.Column(db.String(64), unique=False)
+    citation = db.Column(db.String(1024),unique=False)
     topology = db.Column(db.String(1), unique=False)
     sequence = db.Column(db.String(1024), unique=False)
     n_term = db.Column(db.String(32), unique=False)
@@ -52,6 +53,7 @@ class Peptoid(db.Model):
             'experiment': self.experiment,
             'pub_doi': self.pub_doi,
             'struct_doi': self.struct_doi,
+            'citation': self.citation,
             'topology': self.topology,
             'sequence':self.sequence,
             'n_term':self.n_term,
@@ -88,7 +90,7 @@ class Author(db.Model):
         return data
 
     def __repr__(self):
-        return '<Author {}>'.format(self.last_name)
+        return '<Author {}>'.format(self.last_name + ", " + self.first_name)
 
 # residues table: nomenclature
 
